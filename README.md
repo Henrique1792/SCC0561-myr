@@ -37,5 +37,8 @@ are available:
 	`python3 myr.py dbAnalyse `
 
 	Myr will analyse db content and measure quality as specifications 
-	determine,
+	determine.
 
+4. DB used
+	I'll use [ALOI images using half resolution](http://aloi.science.uva.nl/tars/aloi_red2_col.tar). It's a nice resource with simple
+	images - which is useful for our implementation.
