@@ -23,6 +23,9 @@ def main():
         if sys.argv[1] == "analysis":
             analyzeImg(sys.argv[2])
         else:
-            print("option not found")
+            if sys.argv[1] == "dbAnalyse":
+                print("2")
+            else:
+                print("option not found")
 
 main()

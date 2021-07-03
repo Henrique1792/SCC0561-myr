@@ -1,30 +1,41 @@
 import cv2
 
 
-def extractDescriptors():
+def extractDescriptors(imgName):
+    # Carrega a img de entrada
+    img = cv2.imread(imgName)
+
+    # Converte a img para a escala de cinza
+    grayscale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # ORB extrator
+    orb = cv2.ORB_create()
+    kp, des=orb.detectAndCompute(grayscale, None)
+
+    return des, kp
 
 
 
 def analyzeImg(imgName):
-    # Carrega a imagem de entrada
-    imagem = cv2.imread(imgName)
+    # Carrega a img de entrada
+    img = cv2.imread(imgName)
 
-    # Converte a imagem para a escala de cinza
-    escala_cinza = cv2.cvtColor(imagem, cv2.COLOR_BGR2GRAY)
+    # Converte a img para a escala de cinza
+    grayscale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # Cria o extrator de caracteristicas SIFT
     sift = cv2.xfeatures2d.SIFT_create()
 
-    # Detecta os pontos-chave da imagem globalmente
-    keypoints, descritores = sift.detectAndCompute(escala_cinza, None)
+    # Detecta os pontos-chave da img globalmente
+    keypoints, descriptors = sift.detectAndCompute(grayscale, None)
 
-    # Desenha os pontos-chave como circulos na imagem 'escala_cinza' 
-    imagem_saida = cv2.drawKeypoints(escala_cinza, keypoints, imagem)
+    # Desenha os pontos-chave como circulos na img 'grayscale' 
+    out_img = cv2.drawKeypoints(grayscale, keypoints, img)
 
-    #imagem2 = cv2.imread('pontos_chave_SIFT.jpg')
-    cv2.imshow("Pontos-chave", imagem_saida)
+    #img2 = cv2.imread('pontos_chave_SIFT.jpg')
+    cv2.imshow("Pontos-chave", out_img)
     k = cv2.waitKey(0)
 
-    # Salva a imagem com os pontos-chave como 'pontos_chave_SIFT.jpg
-    cv2.imwrite('pontos_chave_SIFT.jpg',imagem_saida)
+    # Salva a img com os pontos-chave como 'pontos_chave_SIFT.jpg
+    cv2.imwrite('pontos_chave_SIFT.jpg',out_img)
 
