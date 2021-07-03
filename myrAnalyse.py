@@ -3,16 +3,19 @@ import cv2
 
 def extractDescriptors(imgName):
     # Carrega a img de entrada
-    img = cv2.imread(imgName)
+    img = cv2.imread('db/'+imgName)
+    if img is None:
+        print('db/'+imgName+'not Found!')
+        return []
 
     # Converte a img para a escala de cinza
     grayscale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # ORB extrator
     orb = cv2.ORB_create()
-    kp, des=orb.detectAndCompute(grayscale, None)
+    kp, des = orb.detectAndCompute(grayscale, None)
 
-    return des, kp
+    return kp, des
 
 
 
