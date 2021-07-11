@@ -1,6 +1,6 @@
 from myrAnalyse import *
-from  myrGendb  import *
-
+from myrGendb import *
+import sys
 #
 # SCC0561 - MIR implementation
 # author: Henrique F. M. Freitas
@@ -16,12 +16,12 @@ def main():
 
     # defining which operation you're executing
     if sys.argv[1] == "genDict":
-        print("Generate dictionary using 10 files - outputing into db.txt")
+        print("Generate dictionary using 10 files - outputing into db.pkl")
         generateDict()
 
     else:
         if sys.argv[1] == "analysis":
-            analyzeImg(sys.argv[2])
+            compareBOVWDictHistograms(sys.argv[2])
         else:
             if sys.argv[1] == "dbAnalyse":
                 print("2")

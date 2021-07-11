@@ -1,38 +1,32 @@
 import cv2
+import pickle
+from scipy.spatial import distance as dist
 
 
-def extractDescriptors(imgName):
-    # Carrega a img de entrada
-    img = cv2.imread('db/'+imgName)
-    if img is None:
-        print('db/'+imgName+'not Found!')
-        return []
 
-    # Converte a img para a escala de cinza
-    grayscale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+from myrGendb import genHistogram, extractDescriptors
+from myrPlot import showResults
 
-    # ORB extrator
-    orb = cv2.ORB_create()
-    kp, des = orb.detectAndCompute(grayscale, None)
 
-    return kp, des
-
+# Chebyshev distance
+def myrDistance(img1, img2):
+    return dist.chebyshev(img1, img2)
 
 
 def analyzeImg(imgName):
-    # Carrega a img de entrada
+    # Load img input
     img = cv2.imread(imgName)
 
-    # Converte a img para a escala de cinza
+    # convert it to grayscale
     grayscale = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # Cria o extrator de caracteristicas SIFT
+    # generate SIFT extractor
     sift = cv2.xfeatures2d.SIFT_create()
 
-    # Detecta os pontos-chave da img globalmente
+    # generate img's globally keypoints
     keypoints, descriptors = sift.detectAndCompute(grayscale, None)
 
-    # Desenha os pontos-chave como circulos na img 'grayscale' 
+    # Draw each keypoint as circles at grayscale img
     out_img = cv2.drawKeypoints(grayscale, keypoints, img)
 
     #img2 = cv2.imread('pontos_chave_SIFT.jpg')
@@ -42,3 +36,21 @@ def analyzeImg(imgName):
     # Salva a img com os pontos-chave como 'pontos_chave_SIFT.jpg
     cv2.imwrite('pontos_chave_SIFT.jpg',out_img)
 
+
+def compareBOVWDictHistograms(inputImg):
+    dictHistograms = []
+    #first, load dict
+    with open("dict.pkl", "rb") as BOWD:
+        bovw = pickle.load(BOWD)
+        for content in bovw:
+            dictHistograms.append(genHistogram(content))
+
+    #Analyse img histogram
+        _, inputImgD = extractDescriptors(inputImg)
+        inputImgH = genHistogram(inputImgD)
+
+        results = []
+        for i in range(len(dictHistograms)):
+            distance = myrDistance(inputImgH, dictHistograms[i])
+            results.append([inputImgH, distance])
+        showResults(inputImg, results)
