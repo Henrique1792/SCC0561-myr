@@ -27,7 +27,7 @@ are available:
 
 2. Image Analysis
 
-	`python3 myr.py imgAnalyse <imageName>`
+	`python3 myr.py analysis <imageName>`
 	
 	Myr will evaluate <imageName> using dict images - giving it's similarity
 	values.

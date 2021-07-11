@@ -7,10 +7,12 @@ def showResults(imgName, results):
     fig = plt.figure("source: "+imgName)
     ax = fig.add_subplot(1,1,1)
     img = cv2.imread('db/'+imgName)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     ax.imshow(img)
     plt.axis("off")
 
     db_names = os.listdir("dict")
+    print(db_names)
 
     # initialize the results figure
     fig = plt.figure("Results")
@@ -20,7 +22,7 @@ def showResults(imgName, results):
         # show the result
         ax = fig.add_subplot(2, 5, i+1)
         ax.set_title("%d: %.2f" % (i, v))
-        dct_img = cv2.imread('dict/'+db_names[i])
+        dct_img = cv2.imread('dict/%s' % db_names[i])
         dct_img = cv2.cvtColor(dct_img, cv2.COLOR_BGR2RGB)
         plt.imshow(dct_img)
         plt.axis("off")
