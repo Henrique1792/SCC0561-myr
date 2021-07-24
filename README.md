@@ -33,3 +33,9 @@ After setup images of interest (both in db and dict directories), options availa
 	Execution would be
 	` python3 myr.py checkImg <imgName>`
 
+
+### Considerations
+1. Couldn't implement image analyse in demanded period, unforunately.
+
+2. Added confusion matrix in order to show results it properly - but I couldn't elaborate a harder test
+   using other extractors like BRISK, SIFT, etc.
