@@ -18,7 +18,6 @@ def imglist(path):
 
 # get descriptor from img `imgName`
 def extract_characteristcs(imgName):
-    # load imgName
     img = cv2.imread(imgName)
     if img is None:
         print(imgName+'not Found!')
@@ -53,7 +52,6 @@ def generateDict():
         class_id+=1
 
     for image_path in image_paths:
-        print(image_path)
         _, descriptor = extract_characteristcs(image_path)
         dict_descriptors.append((image_path, descriptor))
 

@@ -12,17 +12,17 @@ def main():
 
     if len(sys.argv) < 2:
         print("insuficient nargs\n")
-        print("usage: python3 myr.py <analysis> [tgtImg]")
+        print("usage: python3 myr.py <analysis>  || checkImg [tgtImg]")
         sys.exit()
 
     # defining which operation you're executing
     if sys.argv[1] == "checkImage":
-        print("aho")
+        # couldn't implement it properly
+        myrCheckImage(sys.argv[2])
     else:
         if sys.argv[1] == "analysis":
-            if sys.argv[2] == "dbAnalyse":
-                myr_classify()
-            else:
-                print("option not found")
+            myr_classify()
+        else:
+            print("option not found")
 
 main()

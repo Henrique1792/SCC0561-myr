@@ -16,29 +16,20 @@ Named as Myr as wordplay for MTG creature type
 
 ### Usage
 
-After setup images of interest (both in db and dict directories), three possibilities
-are available:
+Dict will be generated in each execution, using db/dict/<class_name> folders
+After setup images of interest (both in db and dict directories), options available:
 
-1. Dictionary generation
-
-	`python3 myr.py genDict`
+1. DB Analysis
 	
-	Myr will generate  a new dictionary using all images inside dict directory.
-
-2. Image Analysis
-
-	`python3 myr.py analysis <imageName>`
+	`python3 myr.py analysis`
 	
-	Myr will evaluate <imageName> using dict images - giving it's similarity
-	values.
+	Myr will evaluate images inside db/test 
 
-3. DB Analysis
-	
-	`python3 myr.py dbAnalyse `
 
-	Myr will analyse db content and measure quality as specifications 
-	determine.
+	output is sorted classification, precision, recall, F1 measurements and confusion matrix
+	associated.
+3. IMG analyse content
 
-4. DB used
-	I'll use [ALOI images using half resolution](http://aloi.science.uva.nl/tars/aloi_red2_col.tar). It's a nice resource with simple
-	images - which is useful for our implementation.
+	Execution would be
+	` python3 myr.py checkImg <imgName>`
+
