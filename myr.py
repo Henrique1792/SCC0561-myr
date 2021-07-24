@@ -1,4 +1,3 @@
-from myrAnalyse import *
 from myrGendb import *
 import sys
 #
@@ -6,25 +5,23 @@ import sys
 # author: Henrique F. M. Freitas
 #
 
+from gym import gymTest
 
 def main():
+    generateDict()
 
     if len(sys.argv) < 2:
         print("insuficient nargs\n")
-        print("usage: python3 myr.py <genDict||analysis> [tgtImg]")
+        print("usage: python3 myr.py <analysis> [tgtImg]")
         sys.exit()
 
     # defining which operation you're executing
-    if sys.argv[1] == "genDict":
-        print("Generate dictionary using 10 files - outputing into db.pkl")
-        generateDict()
-
+    if sys.argv[1] == "checkImage":
+        print("aho")
     else:
         if sys.argv[1] == "analysis":
-            compareBOVWDictHistograms(sys.argv[2])
-        else:
-            if sys.argv[1] == "dbAnalyse":
-                print("2")
+            if sys.argv[2] == "dbAnalyse":
+                myr_classify()
             else:
                 print("option not found")
 
